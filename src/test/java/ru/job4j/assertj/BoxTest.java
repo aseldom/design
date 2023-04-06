@@ -21,14 +21,14 @@ class BoxTest {
     }
 
     @Test
-    void ThenNumberOfVertices8() {
+    void thenNumberOfVertices8() {
         Box box = new Box(8, 10);
         int vertices = box.getNumberOfVertices();
         assertThat(vertices).isEqualTo(8);
     }
 
     @Test
-    void ThenNumberOfVertices4() {
+    void thenNumberOfVertices4() {
         Box box = new Box(4, 10);
         int vertices = box.getNumberOfVertices();
         assertThat(vertices).isEqualTo(4);
@@ -49,14 +49,14 @@ class BoxTest {
     }
 
     @Test
-    void ifVertex4Edge4ThenArea27_7() {
+    void ifVertex4Edge4ThenArea27and7() {
         Box box = new Box(4, 4);
         Double area = box.getArea();
         assertThat(area).isEqualTo(27.712d, withPrecision(0.001));
     }
 
     @Test
-    void ifVertex8Edge4ThenArea96_0() {
+    void ifVertex8Edge4ThenArea96and0() {
         Box box = new Box(8, 4);
         Double area = box.getArea();
         assertThat(area).isEqualTo(96.0d, withPrecision(0.001));
