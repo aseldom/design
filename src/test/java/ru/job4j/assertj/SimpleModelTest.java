@@ -12,7 +12,6 @@ class SimpleModelTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-
     @Test
     void  checkName() {
         SimpleModel sm = new SimpleModel();
