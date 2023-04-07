@@ -41,8 +41,9 @@ class NameLoadTest {
                 .hasMessageContaining("this name:")
                 .hasMessageContaining(names[0])
                 .hasMessageContaining("does not contain a key");
-    }@Test
+    }
 
+    @Test
     void checkNameContainsValue() {
         NameLoad nameLoad = new NameLoad();
         String[] names = {"s="};
