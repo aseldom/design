@@ -16,8 +16,8 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         if (size == 0) {
             head = new Node<>(value, null);
         } else {
-            Node<E> c;
-            for (c = head; c.next != null;) {
+            Node<E> c = head;
+            while (c.next != null) {
                 c = c.next;
             }
             c.next = new Node<>(value, null);
