@@ -16,16 +16,14 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
         if (size == 0) {
             head = new Node<>(value, null);
         } else {
-            Node<E> c = head;
-            int last = size - 1;
-            while (last > 0) {
+            Node<E> c;
+            for (c = head; c.next != null;) {
                 c = c.next;
-                last--;
             }
             c.next = new Node<>(value, null);
         }
-        size++;
         modCount++;
+        size++;
     }
 
     @Override
@@ -43,7 +41,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     public Iterator<E> iterator() {
         return new Iterator<>() {
             final int expectedModCount = modCount;
-            int point = 0;
             Node<E> c = head;
 
             @Override
@@ -51,7 +48,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return point < size;
+                return c != null;
             }
 
             @Override
@@ -61,7 +58,6 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
                 }
                 E i = c.item;
                 c = c.next;
-                point++;
                 return i;
             }
         };
