@@ -21,10 +21,9 @@ public class SimpleSet<T> implements Set<T> {
 
     @Override
     public boolean contains(T value) {
-        Iterator<T> iterator = iterator();
         boolean res = false;
-        while (iterator.hasNext()) {
-            if (Objects.equals(iterator.next(), value)) {
+        for (T el : set) {
+            if (Objects.equals(el, value)) {
                 res = true;
                 break;
             }
