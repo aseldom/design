@@ -3,39 +3,33 @@ package ru.job4j.map;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 public class SimpleMap<K, V> implements Map<K, V> {
 
     private static final float LOAD_FACTOR = 0.75f;
     private int capacity = 8;
     private int count = 0;
-    private boolean expand = false;
     private int modCount = 0;
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
     @Override
     public boolean put(K key, V value) {
-        if ((int) (capacity * LOAD_FACTOR) <= count) {
-            expand = true;
+        if (capacity * LOAD_FACTOR <= count) {
             expand();
         }
         boolean res = false;
-        int index = key == null ? 0 : indexFor(hash(key.hashCode()));
+        int index = index(key);
         if (table[index] == null) {
             table[index] = new MapEntry<>(key, value);
             res = true;
-            if (!expand) {
-                modCount++;
-                count++;
-            }
-
+            modCount++;
+            count++;
         }
         return res;
     }
 
     private int hash(int hashCode) {
-        return (hashCode == 0) ? 0 : (hashCode) ^ (hashCode >>> 16);
+        return hashCode ^ (hashCode >>> 16);
     }
 
     private int indexFor(int hash) {
@@ -48,40 +42,47 @@ public class SimpleMap<K, V> implements Map<K, V> {
         table = new MapEntry[capacity];
         for (MapEntry<K, V> entry: newTable) {
             if (entry != null) {
-                put(entry.key, entry.value);
+                int index = index(entry.key);
+                if (table[index] == null) {
+                    table[index] = new MapEntry<>(entry.key, entry.value);
+                }
             }
         }
-        expand = false;
     }
 
     @Override
     public V get(K key) {
-        V res = null;
-        int index = key == null ? 0 : indexFor(hash(key.hashCode()));
-        if (table[index] == null) {
-            res = null;
-        } else if (key == null && table[index].key == null) {
-            res = table[index].value;
-        } else if (key == null || table[index].key == null) {
-            res = null;
-        } else if (key.hashCode() == table[index].key.hashCode()
-                && key.equals(table[index].key)) {
-            res = table[index].value;
-        }
-        return res;
+        MapEntry<K, V> entry = entry(key);
+        return entry == null ? null : equals(key, entry.key) ? entry.value : null;
     }
 
     @Override
     public boolean remove(K key) {
-        int index = key == null ? 0 : indexFor(hash(key.hashCode()));
         boolean res = false;
-        if (table[index] != null) {
+        int index = index(key);
+        if (table[index] != null && equals(table[index].key, key)) {
             table[index] = null;
             modCount++;
             count--;
             res = true;
         }
         return res;
+    }
+
+    private boolean equals(K k1, K k2) {
+        return k1 == null && k2 == null
+                || (k1 != null && k2 != null
+                && (k1.hashCode() == k2.hashCode()
+                && k1.equals(k2)));
+
+    }
+
+    private MapEntry<K, V> entry(K key) {
+        return key == null ? table[0] : table[indexFor(hash(key.hashCode()))];
+    }
+
+    private int index(K key) {
+        return key == null ? 0 : indexFor(hash(key.hashCode()));
     }
 
     @Override
@@ -118,23 +119,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
         public MapEntry(K key, V value) {
             this.key = key;
             this.value = value;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
-                return false;
-            }
-            MapEntry<?, ?> mapEntry = (MapEntry<?, ?>) o;
-            return Objects.equals(key, mapEntry.key);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(key);
         }
     }
 }
