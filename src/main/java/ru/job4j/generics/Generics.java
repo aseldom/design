@@ -1,11 +1,16 @@
 package ru.job4j.generics;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.sql.Array;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Generics {
     public static void main(String[] args) {
+        List<String> l = new LinkedList<>();
+        Stack<String> st = new Stack<>();
+        st.push("asdf");
+        System.out.println(st.pop());
+
         Generics gen = new Generics();
         List<Animal> first = new ArrayList<>();
         List<Predator> second = new ArrayList<>();
