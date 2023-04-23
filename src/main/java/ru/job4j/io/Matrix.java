@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Matrix {
     public static void main(String[] args) {
@@ -15,8 +16,8 @@ public class Matrix {
         }
         try (FileOutputStream out = new FileOutputStream("data/multiple.txt")) {
             out.write(stringBuilder.toString().getBytes());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
     }
 }
