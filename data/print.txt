@@ -1,0 +1,2 @@
+From PrintStream to OutputStream
+second string
