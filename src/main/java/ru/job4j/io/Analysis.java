@@ -22,7 +22,6 @@ public class Analysis {
                     find = false;
                     out.printf("%s;%s%n", begin, end);
                 }
-
             }
         } catch (IOException e) {
             e.printStackTrace();
