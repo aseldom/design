@@ -18,14 +18,14 @@ public class Config {
     public void load() {
         try (BufferedReader in = new BufferedReader(new FileReader(this.path))) {
             for (String s = in.readLine(); s != null; s = in.readLine()) {
-                String[] sp = s.split("=", 2);
-                if (!s.startsWith("#")
-                && sp.length > 1 && sp[0].length() > 0 && !sp[0].endsWith(" ")
-                && sp[1].length() > 0 && !sp[1].startsWith(" ")) {
-                    values.put(sp[0], sp[1]);
-                } else if (!(s.length() == 0
-                            || s.startsWith("#"))) {
-                    throw new IllegalArgumentException();
+                if (!s.startsWith("#") && s.length() != 0) {
+                    String[] sp = s.split("=", 2);
+                    if (sp.length > 1 && sp[0].length() > 0 && !sp[0].endsWith(" ")
+                            && sp[1].length() > 0 && !sp[1].startsWith(" ")) {
+                        values.put(sp[0], sp[1]);
+                    } else {
+                        throw new IllegalArgumentException();
+                    }
                 }
             }
         } catch (IOException e) {
