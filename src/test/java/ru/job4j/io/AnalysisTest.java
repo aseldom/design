@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 class AnalysisTest {
 
     @Test
-    void fileTest1 (@TempDir Path tempDir) throws IOException {
+    void fileTest1(@TempDir Path tempDir) throws IOException {
         File source = tempDir.resolve("source.txt").toFile();
         File target = tempDir.resolve("target.csv").toFile();
         try (PrintWriter in = new PrintWriter(source)) {
@@ -33,7 +33,7 @@ class AnalysisTest {
     }
 
     @Test
-    void fileTest2 (@TempDir Path tempDir) throws IOException {
+    void fileTest2(@TempDir Path tempDir) throws IOException {
         File source = tempDir.resolve("source.txt").toFile();
         File target = tempDir.resolve("target.csv").toFile();
         try (PrintWriter in = new PrintWriter(source)) {
