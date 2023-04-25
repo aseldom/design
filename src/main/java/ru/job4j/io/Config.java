@@ -18,14 +18,16 @@ public class Config {
     public void load() {
         try (BufferedReader in = new BufferedReader(new FileReader(this.path))) {
             for (String s = in.readLine(); s != null; s = in.readLine()) {
-                if (!s.startsWith("#") && s.length() != 0) {
-                    String[] sp = s.split("=", 2);
-                    if (sp.length > 1 && sp[0].length() > 0 && !sp[0].endsWith(" ")
-                            && sp[1].length() > 0 && !sp[1].startsWith(" ")) {
-                        values.put(sp[0], sp[1]);
-                    } else {
+                if (!s.startsWith("#") && !s.isEmpty()) {
+                    String[] sp = s.trim().split("=", 2);
+                    if (sp.length < 2
+                            || sp[0].isBlank()
+                            || sp[1].isBlank()
+                            || sp[0].endsWith(" ")
+                            || sp[1].startsWith(" ")) {
                         throw new IllegalArgumentException();
                     }
+                    values.put(sp[0], sp[1]);
                 }
             }
         } catch (IOException e) {
@@ -34,7 +36,7 @@ public class Config {
     }
 
     public String value(String key) {
-        return values.getOrDefault(key, null);
+        return values.get(key);
     }
 
     @Override
