@@ -22,9 +22,7 @@ public class Config {
                     String[] sp = s.trim().split("=", 2);
                     if (sp.length < 2
                             || sp[0].isBlank()
-                            || sp[1].isBlank()
-                            || sp[0].endsWith(" ")
-                            || sp[1].startsWith(" ")) {
+                            || sp[1].isBlank()) {
                         throw new IllegalArgumentException();
                     }
                     values.put(sp[0], sp[1]);
