@@ -29,7 +29,7 @@ class AnalysisTest {
         try (BufferedReader out = new BufferedReader(new FileReader(target))) {
             out.lines().forEach(stringBuilder::append);
         }
-        assertThat("10:57:01;11:02:02").isEqualTo(stringBuilder.toString());
+        assertThat("10:57:01;11:02:02;").isEqualTo(stringBuilder.toString());
     }
 
     @Test
@@ -51,6 +51,6 @@ class AnalysisTest {
         try (BufferedReader out = new BufferedReader(new FileReader(target))) {
             out.lines().forEach(stringBuilder::append);
         }
-        assertThat("10:57:01;10:59:0111:01:02;11:02:02").isEqualTo(stringBuilder.toString());
+        assertThat("10:57:01;10:59:01;11:01:02;11:02:02;").isEqualTo(stringBuilder.toString());
     }
 }
