@@ -26,5 +26,11 @@ public class Search {
         if (args.length != 2) {
             throw new IllegalArgumentException("Arguments length not equal 2");
         }
+        if (!Files.isDirectory(Paths.get(args[0]))) {
+            throw new IllegalArgumentException("First argument is not Path");
+        }
+        if (!(args[1].startsWith(".") && args[1].length() > 1)) {
+            throw new IllegalArgumentException("Second argument is not extension");
+        }
     }
 }
