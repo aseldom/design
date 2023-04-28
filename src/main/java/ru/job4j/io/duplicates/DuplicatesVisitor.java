@@ -24,11 +24,8 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         if (Files.isRegularFile(file)) {
             FileProperty newFile = new FileProperty(file.toFile().length(), file.getFileName().toString());
-            List<String> l = store.putIfAbsent(newFile,
-                    new ArrayList<>(Arrays.asList(file.toAbsolutePath().toString())));
-            if (l != null) {
-                l.add(file.toAbsolutePath().toString());
-            }
+            store.putIfAbsent(newFile, new ArrayList<>());
+            store.get(newFile).add(file.toAbsolutePath().toString());
         }
         return super.visitFile(file, attrs);
     }
