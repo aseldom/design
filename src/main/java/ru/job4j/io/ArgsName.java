@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +22,12 @@ public class ArgsName {
         for (String arg : args) {
             String[] keyValue = ArgsName.check(arg);
             values.put(keyValue[0].substring(1), keyValue[1]);
+        }
+    }
+
+    public void pathValidate(Path path) {
+        if (!Files.isDirectory(path)) {
+            throw new IllegalArgumentException(String.format("The directory - '%s' does not exist.", path));
         }
     }
 
