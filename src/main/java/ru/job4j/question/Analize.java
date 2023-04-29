@@ -10,9 +10,6 @@ public class Analize {
         int changed = 0;
         int deleted = 0;
         int equal = 0;
-        deleted = (int) previous.stream().filter(s -> !current.contains(s))
-                .count();
-        added = current.size() - previous.size() + deleted;
 
         for (User userPrev : previous) {
             for (User userCur : current) {
@@ -26,6 +23,7 @@ public class Analize {
             }
         }
         deleted = previous.size() - equal - changed;
+        added = current.size() - previous.size() + deleted;
         return new Info(added, changed, deleted);
     }
 }
