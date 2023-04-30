@@ -31,15 +31,15 @@ public class ConsoleChat {
             System.out.println("Введите фразу:");
             String in = scanner.nextLine();
             log.add("Ввод пользователя: " + in);
-            if (in.equals(STOP) && !stop) {
+            if (STOP.equals(in) && !stop) {
                 stop = true;
                 log.add("Чат приостановлен");
                 System.out.println("Чат приостановлен, для продолжения введите слово: \"продолжить\"");
-            } else if (in.equals(CONTINUE) && stop) {
+            } else if (CONTINUE.equals(in) && stop) {
                 stop = false;
                 log.add("Чат продолжен");
                 System.out.println("Чат продолжен");
-            } else if (in.equals(OUT)) {
+            } else if (OUT.equals(in)) {
                 run = false;
                 log.add("Чат завершен");
                 System.out.println("Чат завершен");
@@ -49,6 +49,7 @@ public class ConsoleChat {
                 System.out.println("Ответ бота: " + ans);
             }
         }
+        scanner.close();
         saveLog(log);
     }
 
