@@ -17,6 +17,26 @@ public class Student {
         this.pet = pet;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public boolean isMale() {
+        return male;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String[] getTheme() {
+        return theme;
+    }
+
+    public Pet getPet() {
+        return pet;
+    }
+
     @Override
     public String toString() {
         return "Student{"
