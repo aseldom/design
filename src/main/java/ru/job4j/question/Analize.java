@@ -1,6 +1,7 @@
 package ru.job4j.question;
 
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Analize {
@@ -9,21 +10,17 @@ public class Analize {
         int added = 0;
         int changed = 0;
         int deleted = 0;
-        int equal = 0;
+        int equals = 0;
+        Set<User> dc = new HashSet<>(previous);
+        Set<User> nc = new HashSet<>(current);
+        dc.removeAll(current);
+        nc.removeAll(previous);
+        equals = previous.size() - dc.size();
+        dc.retainAll(nc);
+        changed = dc.size();
+        added = current.size() - equals - changed;
+        deleted = previous.size() - equals - changed;
 
-        for (User userPrev : previous) {
-            for (User userCur : current) {
-                if (userPrev.getId() == userCur.getId()) {
-                    if (userPrev.getName().equals(userCur.getName())) {
-                        equal++;
-                    } else {
-                        changed++;
-                    }
-                }
-            }
-        }
-        deleted = previous.size() - equal - changed;
-        added = current.size() - previous.size() + deleted;
         return new Info(added, changed, deleted);
     }
 }

@@ -10,7 +10,7 @@ public class College {
                 20,
                 new String[] {"Math", "Phisic"},
                 new Pet("Druzhok"));
-        final Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder().create();
         String gsonStudent = gson.toJson(student);
         Student fromGsonStudent = gson.fromJson(gsonStudent, Student.class);
         System.out.println(student);
