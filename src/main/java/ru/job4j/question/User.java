@@ -37,11 +37,11 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return id == user.id && Objects.equals(name, user.name);
+        return id == user.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id);
     }
 }
