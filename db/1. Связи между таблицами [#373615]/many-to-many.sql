@@ -10,8 +10,8 @@ create table shop(
 
 create table man_shop(
 	id serial primary key,
-	man_id int references shop(id),
-	shop_id int references man(id)
+	man_id int references man(id),
+	shop_id int references shop(id)
 );
 
 insert into man(name) values('Roman');
