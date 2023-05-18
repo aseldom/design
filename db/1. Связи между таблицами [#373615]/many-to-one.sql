@@ -1,19 +1,17 @@
-create table child(
-	id serial primary key,
-	name varchar(255)
-);
-
 create table mother(
 	id serial primary key,
-	name varchar(255),
-	child_id int references child(id)
+	name varchar(255)
+	
 );
 
-insert into child (name) values('Egor');
-insert into mother (name, child_id) values ('Olga', 1);
+create table child(
+	id serial primary key,
+	name varchar(255),
+	mother_id int references mother(id)
+);
 
+insert into mother (name) values ('Olga');
+insert into child (name, mother_id) values ('Egor', 1);
 
-select * from mother;
-select * from child where id in (select child_id from mother);
-
-
+select * from child;
+select * from mother where id in (select mother_id from child);
