@@ -45,7 +45,7 @@ where t.name = 'СЫР'
 -- 2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженое"
 select * from product p
 join type t on p.type_id = t.id
-where p.name like '%Сыр%';
+where p.name like '%Мороженое%';
 
 -- 3. Написать запрос, который выводит все продукты, срок годности которых уже истек
 select * from product p
