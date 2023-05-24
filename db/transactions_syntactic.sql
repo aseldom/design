@@ -10,6 +10,7 @@ insert into products (name, producer, count, price) values ('name1', 'prod1', 12
 insert into products (name, producer, count, price) values ('name2', 'prod2', 12, 20);
 insert into products (name, producer, count, price) values ('name3', 'prod3', 12, 20);
 
+
 start transaction isolation level read committed;
 update products set name = 'name45' where name = 'name3';
 savepoint save_one;
