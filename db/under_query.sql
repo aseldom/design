@@ -31,5 +31,5 @@ insert into orders (amount, customer_id) VALUES (170, 2);
 insert into orders (amount, customer_id) VALUES (180, 2);
 insert into orders (amount, customer_id) VALUES (500, 3);
 
-select * from customers where customers.id in (select customer_id from orders);
+select * from customers where customers.id not in (select customer_id from orders);
 
