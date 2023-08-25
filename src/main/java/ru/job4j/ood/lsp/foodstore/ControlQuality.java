@@ -14,15 +14,12 @@ public class ControlQuality {
 
     public void resort() {
         List<Food> temp = new ArrayList<>();
-        List<Food> foodsStore;
         for (Store<Food> store : stores) {
-            foodsStore = store.getFoods();
+            List<Food> foodsStore = store.getFoods();
             temp.addAll(foodsStore);
             foodsStore.clear();
         }
-        for (Food food : temp) {
-            distribute(food);
-        }
+        temp.forEach(this::distribute);
     }
 
     public Store<Food> distribute(Food food) {

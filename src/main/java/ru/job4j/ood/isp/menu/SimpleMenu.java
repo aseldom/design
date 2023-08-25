@@ -10,8 +10,7 @@ public class SimpleMenu implements Menu {
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
         boolean res = false;
         if (parentName == null) {
-            rootElements.add(new SimpleMenuItem(childName, actionDelegate));
-            res = true;
+            res = rootElements.add(new SimpleMenuItem(childName, actionDelegate));
         } else {
             Optional<ItemInfo> itemInfo = findItem(parentName);
             if (itemInfo.isPresent() && !childName.equals(itemInfo.get().menuItem.getName())) {
@@ -29,12 +28,12 @@ public class SimpleMenu implements Menu {
             ItemInfo itemInfo = findItem(itemName).get();
             menuItemInfo = new MenuItemInfo(itemInfo.menuItem, itemInfo.number);
         }
-        return Optional.of(menuItemInfo);
+        return Optional.ofNullable(menuItemInfo);
     }
 
     @Override
     public Iterator<MenuItemInfo> iterator() {
-        DFSIterator dfsIterator = new DFSIterator();
+        Iterator<ItemInfo> dfsIterator = new DFSIterator();
         return new Iterator<>() {
             @Override
             public boolean hasNext() {
@@ -54,15 +53,15 @@ public class SimpleMenu implements Menu {
 
     private Optional<ItemInfo> findItem(String name) {
         DFSIterator dfsIterator = new DFSIterator();
-        Optional<ItemInfo> res = null;
-        while (!dfsIterator.stack.isEmpty()) {
+        ItemInfo res = null;
+        while (dfsIterator.hasNext()) {
             var temp = dfsIterator.next();
             if (name.equals(temp.menuItem.getName())) {
-                res = Optional.of(temp);
+                res = temp;
                 break;
             }
         }
-        return res;
+        return Optional.ofNullable(res);
     }
 
     private static class SimpleMenuItem implements MenuItem {
