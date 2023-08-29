@@ -7,7 +7,6 @@ public class NonNullIterator implements Iterator<Integer> {
 
     private final Integer[] data;
     private int index = 0;
-    private boolean get = false;
 
     public NonNullIterator(Integer[] data) {
         this.data = data;
@@ -15,15 +14,10 @@ public class NonNullIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        if (!get) {
-            for (; index < data.length; index++) {
-                if (data[index] != null) {
-                    get = true;
-                    break;
-                }
-            }
+        while (index < data.length && data[index] == null) {
+            index++;
         }
-        return get;
+        return index < data.length;
     }
 
     @Override
@@ -31,7 +25,6 @@ public class NonNullIterator implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        get = false;
         return data[index++];
     }
 
