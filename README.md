@@ -1,4 +1,4 @@
-# job4j_design
+# design
 
 ## О проекте
 
@@ -73,3 +73,9 @@
    2.5.5. DIP
 
    2.5.6. Контрольные вопросы
+   
+
+---
+#### Контакты для связи:
+* email: a.seldom@gmail.com
+* telegram: @aseldom
